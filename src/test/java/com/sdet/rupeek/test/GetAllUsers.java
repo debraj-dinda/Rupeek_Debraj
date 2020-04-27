@@ -29,10 +29,10 @@ public class GetAllUsers extends BaseLib {
 	 * Validation with Wrong Token.
 	 */
 	@Test(priority = 1)
-	public void getUsersDetailsWithWrongToken() {
-		token = JsonUtils.getJsonString(response, "token");
+	public void getUsersDetailsWithOutAuth() {
+		// token = JsonUtils.getJsonString(response, "token");
 
-		given().auth().oauth2(token).when().get(IAutoConst.GET_ALL_USERS).then().assertThat().statusCode(401).and()
+		given().get(IAutoConst.GET_ALL_USERS).then().assertThat().statusCode(401).and()
 				.contentType("");
 
 	}

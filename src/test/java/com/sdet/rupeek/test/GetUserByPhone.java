@@ -33,18 +33,12 @@ public class GetUserByPhone extends BaseLib {
 	}
 
 	/**
-	 * To get Single user by using Invalid Phone Number
+	 * To get Single user without authentication
 	 */
-
 	@Test(priority = 1)
-
-	public void getSingleUserWithInValidPhoneNum() {
-
-		token = JsonUtils.getJsonString(response, "token");
-
-		given().auth().oauth2(token).pathParam("phone", 803760).when().get(IAutoConst.GET_USER_PHONE).then()
-				.assertThat().statusCode(404).and().contentType(ContentType.JSON);
-
+	public void getSingleRecordWithoutAuth() throws Throwable {
+		given().pathParam("phone", 8037602400l).when().get(IAutoConst.GET_USER_PHONE).then().assertThat()
+				.statusCode(401);
 	}
 
 	/**
@@ -53,12 +47,12 @@ public class GetUserByPhone extends BaseLib {
 
 	@Test(priority = 2)
 
-	public void getSingleUserWithInValidPhoneNum2() {
+	public void getSingleUserWithInValidPhoneNum() {
 
 		token = JsonUtils.getJsonString(response, "token");
 
-		given().auth().oauth2(token).pathParam("phone", 803.760).when().get(IAutoConst.GET_USER_PHONE).then()
-				.assertThat().statusCode(404).and().contentType(ContentType.JSON);
+		given().auth().oauth2(token).pathParam("phone", 803760l).when().get(IAutoConst.GET_USER_PHONE).then()
+				.assertThat().statusCode(200);
 
 	}
 
@@ -68,12 +62,27 @@ public class GetUserByPhone extends BaseLib {
 
 	@Test(priority = 3)
 
+	public void getSingleUserWithInValidPhoneNum2() {
+
+		token = JsonUtils.getJsonString(response, "token");
+
+		given().auth().oauth2(token).pathParam("phone", 803.760).when().get(IAutoConst.GET_USER_PHONE).then()
+				.assertThat().statusCode(200);
+
+	}
+
+	/**
+	 * To get Single user by using Invalid Phone Number
+	 */
+
+	@Test(priority = 4)
+
 	public void getSingleUserWithInValidPhoneNum3() {
 
 		token = JsonUtils.getJsonString(response, "token");
 
-		given().auth().oauth2(token).pathParam("phone", "830.abcjgfg9").when().get(IAutoConst.GET_USER_PHONE).then()
-				.assertThat().statusCode(404).and().contentType(ContentType.JSON);
+		given().auth().oauth2(token).pathParam("phone", "830e345").when().get(IAutoConst.GET_USER_PHONE).then()
+				.assertThat().statusCode(200);
 
 	}
 }

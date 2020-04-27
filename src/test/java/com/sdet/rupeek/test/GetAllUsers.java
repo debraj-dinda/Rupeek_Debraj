@@ -26,7 +26,7 @@ public class GetAllUsers extends BaseLib {
 	}
 
 	/**
-	 * Validation with Wrong Token
+	 * Validation with Wrong Token.
 	 */
 	@Test(priority = 1)
 	public void getUsersDetailsWithWrongToken() {
